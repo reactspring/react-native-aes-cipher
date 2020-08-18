@@ -1,0 +1,36 @@
+{
+    "name": "react-native-aes-cipher",
+    "version": "1.0.0",
+    "description": "AES crypto native module for react-native",
+    "main": "index.js",
+    "types": "index.d.ts",
+    "author": "nixstory@gmail.com",
+    "license": "MIT",
+    "keywords": [
+        "react-native",
+        "react-component",
+        "ios",
+        "android",
+        "aes",
+        "crypto",
+        "mobile",
+        "async",
+        "sha1",
+        "sha256",
+        "sha512",
+        "pbkdf2",
+        "hmac256",
+        "uuid"
+    ],
+    "homepage": "https://github.com/reactspring/react-native-aes-cipher",
+    "bugs": {
+        "url": "https://github.com/reactspring/react-native-aes-cipher/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/reactspring/react-native-aes-cipher.git"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    }
+}
