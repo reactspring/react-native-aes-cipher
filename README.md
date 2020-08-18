@@ -32,43 +32,6 @@ Run `react-native link react-native-aes-cipher` after which you should be able t
 ##### React Native 0.60 and higher
 - Linking is done automatically
 
-##### Using React Native Link (React Native 0.59 and lower)
--   In `android/settings.gradle`
-
-```gradle
-...
-include ':react-native-aes-cipher'
-project(':react-native-aes-cipher').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-aes-cipher/android')
-```
-
--   In `android/app/build.gradle`
-
-```gradle
-...
-dependencies {
-    ...
-    compile project(':react-native-aes-cipher')
-}
-```
-
--   register module (in MainApplication.java)
-
-```java
-......
-import com.tectiv3.aes.RCTAesPackage;
-
-......
-
-@Override
-protected List<ReactPackage> getPackages() {
-   ......
-   new RCTAesPackage(),
-   // or 
-   // packages.add(new RCTAesPackage());
-   ......
-}
-```
-
 ## Usage
 
 ### Example
@@ -77,69 +40,56 @@ protected List<ReactPackage> getPackages() {
 import { NativeModules, Platform } from 'react-native'
 var Aes = NativeModules.Aes
 
-const generateKey = (password, salt, cost, length) => Aes.pbkdf2(password, salt, cost, length)
+const generateKey = (password: string, salt: string, cost: number, length: number) => Aes.pbkdf2(password, salt, cost, length)
 
-const encryptData = (text, key) => {
-    return Aes.randomKey(16).then(iv => {
-        return Aes.encrypt(text, key, iv).then(cipher => ({
-            cipher,
-            iv,
-        }))
-    })
+const encryptData = (text: string, key: any, iv:any) => {
+  return Aes.encrypt(text, key, iv).then((cipher: any) => ({
+    cipher,
+    iv,
+  }))      
 }
 
-const decryptData = (encryptedData, key) => Aes.decrypt(encryptedData.cipher, key, encryptedData.iv)
-
-try {
-    generateKey('Arnold', 'salt', 5000, 256).then(key => {
-        console.log('Key:', key)
-        encryptData('These violent delights have violent ends', key)
-            .then(({ cipher, iv }) => {
-                console.log('Encrypted:', cipher)
-
-                decryptData({ cipher, iv }, key)
-                    .then(text => {
-                        console.log('Decrypted:', text)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    })
-
-                Aes.hmac256(cipher, key).then(hash => {
-                    console.log('HMAC', hash)
-                })
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    })
-} catch (e) {
-    console.error(e)
-}
+const decryptData = (encryptedData: { cipher: any; iv: any; }, key: any) => Aes.decrypt(encryptedData.cipher, key, encryptedData.iv)
 ```
 
-#### Or
-
-```js
-async function asyncDecrypt(cipher, key, iv) {
+#### Key Generation
+```ts
+  private AESKey () {
     try {
-        var text = await decryptData({ cipher, iv }, key)
-        console.log(text)
-        return text
+      generateKey('nixstory@gmail.com', 'SALT', 1000, 256).then((key: any) => {
+        encrypt_key = key;
+      })
+    } catch (e) {
+        console.error(e)
+    }    
+  }
+  
+#### Encrypt
+```ts
+  private AESEncrypt () {
+    const key = encrypt_key;
+    const iv_string = '0123456789abcdef0123456789abcdef';
+
+    try {
+      encryptData2(plain_string, key, iv_string).then(({ cipher, iv }) => {
+        encrypt_iv = iv;
+        encrypt_string = cipher;
+      }).catch((error: any) => {})
     } catch (e) {
         console.error(e)
     }
-}
+  }
 ```
 
-### methods
+#### Descrpy
+```ts
+  private async AESDecrypt () {
+    const key = encrypt_key;
 
--   `encrypt(text, key, iv)`
--   `decrypt(base64, key, iv)`
--   `pbkdf2(text, salt, cost, length)`
--   `hmac256(cipher, key)`
--   `sha1(text)`
--   `sha256(text)`
--   `sha512(text)`
--   `randomUuid()`
--   `randomKey(length)`
+    try {
+      const decrypt_string = await decryptData({ cipher:encrypt_string, iv:encrypt_iv }, key);
+    } catch (e) {
+        console.error(e)
+    }
+  }
+```
