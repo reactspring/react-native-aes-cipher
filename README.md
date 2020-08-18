@@ -38,7 +38,16 @@ var Aes = NativeModules.Aes
 
 const generateKey = (password: string, salt: string, cost: number, length: number) => Aes.pbkdf2(password, salt, cost, length)
 
-const encryptData = (text: string, key: any, iv:any) => {
+const encryptData = (text: string, key: any) => {
+    return Aes.randomKey(16).then((iv: any) => {
+        return Aes.encrypt(text, key, iv).then((cipher: any) => ({
+            cipher,
+            iv,
+        }))
+    })
+}
+
+const encryptDataIV = (text: string, key: any, iv:any) => {
   return Aes.encrypt(text, key, iv).then((cipher: any) => ({
     cipher,
     iv,
@@ -67,7 +76,7 @@ const decryptData = (encryptedData: { cipher: any; iv: any; }, key: any) => Aes.
     const iv_string = '0123456789abcdef0123456789abcdef';
 
     try {
-      encryptData2(plain_string, key, iv_string).then(({ cipher, iv }) => {
+      encryptDataIV(plain_string, key, iv_string).then(({ cipher, iv }) => {
         encrypt_iv = iv;
         encrypt_string = cipher;
       }).catch((error: any) => {})
@@ -81,9 +90,13 @@ const decryptData = (encryptedData: { cipher: any; iv: any; }, key: any) => Aes.
 ```ts
   private async AESDecrypt () {
     const key = encrypt_key;
+    const iv = encrypt_iv;
+    const cipher = encrypt_string;
 
     try {
-      const decrypt_string = await decryptData({ cipher:encrypt_string, iv:encrypt_iv }, key);
+      var decrypt_string = await decryptData({ cipher, iv }, key);
+
+      console.log ("plain text : " + decrypt_string);
     } catch (e) {
         console.error(e)
     }
