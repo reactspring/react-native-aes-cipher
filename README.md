@@ -23,10 +23,6 @@ cd ios
 pod install
 ```
 
-##### Using React Native Link (React Native 0.59 and lower)
-
-Run `react-native link react-native-aes-cipher` after which you should be able to use this library on iOS.
-
 ### Installation (Android)
 
 ##### React Native 0.60 and higher
