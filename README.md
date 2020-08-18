@@ -68,7 +68,8 @@ const decryptData = (encryptedData: { cipher: any; iv: any; }, key: any) => Aes.
         console.error(e)
     }    
   }
-  
+```
+
 #### Encrypt
 ```ts
   private AESEncrypt () {
@@ -86,7 +87,7 @@ const decryptData = (encryptedData: { cipher: any; iv: any; }, key: any) => Aes.
   }
 ```
 
-#### Descrpy
+#### Decrypt
 ```ts
   private async AESDecrypt () {
     const key = encrypt_key;
