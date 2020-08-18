@@ -1,4 +1,4 @@
-# React Native AES
+# React Native AES 128/192/256
 
 AES encryption/decryption for react-native
 
