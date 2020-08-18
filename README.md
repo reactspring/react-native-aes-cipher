@@ -55,6 +55,12 @@ const encryptDataIV = (text: string, key: any, iv:any) => {
 }
 
 const decryptData = (encryptedData: { cipher: any; iv: any; }, key: any) => Aes.decrypt(encryptedData.cipher, key, encryptedData.iv)
+const iv_string = '0123456789abcdef0123456789abcdef';
+
+let encrypt_key:any = "";
+let encrypt_string:any = "";
+let plain_string:any = "1234567890";
+let encrypt_iv:any = "";
 ```
 
 #### Key Generation
@@ -74,7 +80,6 @@ const decryptData = (encryptedData: { cipher: any; iv: any; }, key: any) => Aes.
 ```ts
   private AESEncrypt () {
     const key = encrypt_key;
-    const iv_string = '0123456789abcdef0123456789abcdef';
 
     try {
       encryptDataIV(plain_string, key, iv_string).then(({ cipher, iv }) => {
