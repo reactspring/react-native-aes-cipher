@@ -106,7 +106,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1020;
-				ORGANIZATIONNAME = tectiv3;
+				ORGANIZATIONNAME = reactspring;
 				TargetAttributes = {
 					32D980DC1BE9F11C00FA27E5 = {
 						CreatedOnToolsVersion = 6.4;
