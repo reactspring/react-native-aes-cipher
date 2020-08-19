@@ -26,7 +26,7 @@ pod install
 ### Installation (Android)
 
 ##### React Native 0.60 and higher
-- Linking is done automatically
+- Linking automatically
 
 ## Usage
 
