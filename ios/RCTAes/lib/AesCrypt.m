@@ -131,10 +131,6 @@
     return [self toHex:result];
 }
 
-+ (NSString *) randomUuid {
-  return [[NSUUID UUID] UUIDString];
-}
-
 + (NSString *) randomKey: (NSInteger)length {
     NSMutableData *data = [NSMutableData dataWithLength:length];
     int result = SecRandomCopyBytes(kSecRandomDefault, length, data.mutableBytes);

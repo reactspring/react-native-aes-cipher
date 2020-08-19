@@ -1,14 +1,7 @@
 package com.reactspring.aes;
 
-import android.widget.Toast;
-
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.SecureRandom;
-import java.util.HashMap;
-import java.util.Map;
-
-import java.util.UUID;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -19,8 +12,6 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.PBEKeySpec;
-import javax.crypto.SecretKeyFactory;
 import javax.crypto.Mac;
 
 import org.spongycastle.crypto.digests.SHA512Digest;
@@ -30,18 +21,14 @@ import org.spongycastle.util.encoders.Hex;
 
 import android.util.Base64;
 
-import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.Promise;
-import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
 
 public class RCTAes extends ReactContextBaseJavaModule {
-
     private static final String CIPHER_ALGORITHM = "AES/CBC/PKCS7Padding";
-    public static final String HMAC_SHA_256 = "HmacSHA256";
+    private static final String HMAC_SHA_256 = "HmacSHA256";
     private static final String KEY_ALGORITHM = "AES";
 
     public RCTAes(ReactApplicationContext reactContext) {
@@ -123,15 +110,15 @@ public class RCTAes extends ReactContextBaseJavaModule {
         }
     }
 
-    @ReactMethod
-    public void randomUuid(Promise promise) {
-        try {
-            String result = UUID.randomUUID().toString();
-            promise.resolve(result);
-        } catch (Exception e) {
-            promise.reject("-1", e.getMessage());
-        }
-    }
+//    @ReactMethod
+//    public void randomUuid(Promise promise) {
+//        try {
+//            String result = UUID.randomUUID().toString();
+//            promise.resolve(result);
+//        } catch (Exception e) {
+//            promise.reject("-1", e.getMessage());
+//        }
+//    }
 
     @ReactMethod
     public void randomKey(Integer length, Promise promise) {

@@ -95,17 +95,6 @@ RCT_EXPORT_METHOD(sha512:(NSString *)text
     }
 }
 
-RCT_EXPORT_METHOD(randomUuid:(RCTPromiseResolveBlock)resolve
-                  rejecter:(RCTPromiseRejectBlock)reject) {
-    NSError *error = nil;
-    NSString *data = [AesCrypt randomUuid];
-    if (data == nil) {
-        reject(@"uuid_fail", @"Uuid error", error);
-    } else {
-        resolve(data);
-    }
-}
-
 RCT_EXPORT_METHOD(randomKey:(NSInteger)length
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject) {
