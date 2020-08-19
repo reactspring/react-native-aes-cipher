@@ -109,7 +109,8 @@ let encrypt_iv:any = "";
   }
 ```
 
-#### IOS (Encrypt)
+
+#### IOS Test (Encrypt)
 ```ts
 [Tue Aug 18 2020 15:31:58.668]  LOG      [encrypt] plain text : 1234567890
 [Tue Aug 18 2020 15:31:58.670]  LOG      [encrypt] encrypt key : 591825e3a4f2c9b8f73eb963c77ad160d4802ad7aadc179b066275bcb9d9cfd2
@@ -117,11 +118,10 @@ let encrypt_iv:any = "";
 [Tue Aug 18 2020 15:31:58.671]  LOG      [encrypt] encrypt text : hg7zoTXoD/xbcvj64M0iYg==
 ```
 
-#### ANDROID (Decrypt)
+#### ANDROID Test (Decrypt)
 ```ts
 [Tue Aug 18 2020 15:56:21.306]  LOG      [decrypt] encrypt text : hg7zoTXoD/xbcvj64M0iYg==
 [Tue Aug 18 2020 15:56:21.308]  LOG      [decrypt] encrypt key : 591825e3a4f2c9b8f73eb963c77ad160d4802ad7aadc179b066275bcb9d9cfd2
 [Tue Aug 18 2020 15:56:21.309]  LOG      [decrypt] iv : 0123456789abcdef0123456789abcdef
 [Tue Aug 18 2020 15:56:21.310]  LOG      [decrypt] plain text : 1234567890
 ```
-
