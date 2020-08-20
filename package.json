@@ -1,6 +1,6 @@
 {
     "name": "react-native-aes-cipher",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "AES 128/192/256 native module for react-native",
     "main": "index.js",
     "types": "index.d.ts",
