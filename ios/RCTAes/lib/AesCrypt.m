@@ -50,7 +50,7 @@
                     saltData.bytes,
                     saltData.length,
                     kCCPRFHmacAlgSHA512,
-                    cost,
+                    (unsigned int)cost,
                     hashKeyData.mutableBytes,
                     hashKeyData.length);
 
@@ -66,7 +66,6 @@
     //convert hex string to hex data
     NSData *keyData = [self fromHex:key];
     NSData *ivData = [self fromHex:iv];
-    //    NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
     size_t numBytes = 0;
 
     NSMutableData * buffer = [[NSMutableData alloc] initWithLength:[data length] + kCCBlockSizeAES128];
@@ -97,38 +96,6 @@
 + (NSString *) decrypt: (NSString *)cipherText key: (NSString *)key iv: (NSString *)iv {
     NSData *result = [self AES256CBC:@"decrypt" data:[[NSData alloc] initWithBase64EncodedString:cipherText options:0] key:key iv:iv];
     return [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
-}
-
-+ (NSString *) hmac256: (NSString *)input key: (NSString *)key {
-    NSData *keyData = [self fromHex:key];
-    NSData* inputData = [input dataUsingEncoding:NSUTF8StringEncoding];
-    void* buffer = malloc(CC_SHA256_DIGEST_LENGTH);
-    CCHmac(kCCHmacAlgSHA256, [keyData bytes], [keyData length], [inputData bytes], [inputData length], buffer);
-    NSData *nsdata = [NSData dataWithBytesNoCopy:buffer length:CC_SHA256_DIGEST_LENGTH freeWhenDone:YES];
-    return [self toHex:nsdata];
-}
-
-+ (NSString *) sha1: (NSString *)input {
-    NSData* inputData = [input dataUsingEncoding:NSUTF8StringEncoding];
-    NSMutableData *result = [[NSMutableData alloc] initWithLength:CC_SHA1_DIGEST_LENGTH];
-    CC_SHA1([inputData bytes], (CC_LONG)[inputData length], result.mutableBytes);
-    return [self toHex:result];
-}
-
-+ (NSString *) sha256: (NSString *)input {
-    NSData* inputData = [input dataUsingEncoding:NSUTF8StringEncoding];
-    unsigned char* buffer = malloc(CC_SHA256_DIGEST_LENGTH);
-    CC_SHA256([inputData bytes], (CC_LONG)[inputData length], buffer);
-    NSData *result = [NSData dataWithBytesNoCopy:buffer length:CC_SHA256_DIGEST_LENGTH freeWhenDone:YES];
-    return [self toHex:result];
-}
-
-+ (NSString *) sha512: (NSString *)input {
-    NSData* inputData = [input dataUsingEncoding:NSUTF8StringEncoding];
-    unsigned char* buffer = malloc(CC_SHA512_DIGEST_LENGTH);
-    CC_SHA512([inputData bytes], (CC_LONG)[inputData length], buffer);
-    NSData *result = [NSData dataWithBytesNoCopy:buffer length:CC_SHA512_DIGEST_LENGTH freeWhenDone:YES];
-    return [self toHex:result];
 }
 
 + (NSString *) randomKey: (NSInteger)length {
