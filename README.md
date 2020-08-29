@@ -1,6 +1,7 @@
 # React Native AES 128/192/256
 
 AES encryption/decryption for react-native
+![aes](https://user-images.githubusercontent.com/38146144/91627329-a30ab700-e9f1-11ea-8231-d8ce636957f9.png)
 
 ## Installation
 
