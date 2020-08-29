@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name          = 'react-native-aes-cipher'
-  s.version       = '1.0.0'
+  s.version       = '1.0.9'
   s.summary       = 'Native module for AES encryption'
   s.author        = "nixstory@gmail.com"
   s.license       = 'MIT'
